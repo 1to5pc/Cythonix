@@ -1,3 +1,5 @@
 
-printf("%s", 'Hello World!);
-printf("%s", "Sigma");
+#include <stdio.h>
+printf("%s\n", "Hello World!");
+#include <stdio.h>
+printf("%s\n", "Sigma");
