@@ -15,7 +15,7 @@ def fileParser(fileName):
 
     if os.path.isfile(fileName) == True and open(fileName, 'r').read(1) != '':
         File = open(fileName, 'r')
-        fileContents = File.read().split('\n')
+        fileContents = File.read().replace('\n',';').split(';')
         File.close()
         return fileContents , 0
     else:
