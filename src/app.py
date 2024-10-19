@@ -1,2 +1,1 @@
-print('Hello World!')
-print("Sigma")
+print("Hello");
