@@ -33,19 +33,15 @@ def fileParser(fileName):
 def stringDetect(inputText):
     strings=[]
     for line in inputText:
-        if line == '\n':
-            break
-        else:
-            if 'print' in line:
-                for index in range(len(line)):
-                    if line[index] == "'" or line[index] == '"':
-                        defsymbol = line[index]
-                        startIndex = index
-                        break
-                index = 0
-                for index in range(startIndex+1, len(line)):
-                    if line[index] == defsymbol:
-                        stopIndex = index
-                        break
-                strings.append[line[startIndex:stopIndex+1]]
-                
+        if 'print' in line:
+            for index in range(len(line)):
+                if line[index] == "'" or line[index] == '"':
+                    defsymbol = line[index]
+                    startIndex = index
+                    break
+            index = 0
+            for index in range(startIndex+1, len(line)):
+                if line[index] == defsymbol:
+                    stopIndex = index
+                    break
+            strings.append[line[startIndex:stopIndex+1]]
