@@ -9,11 +9,6 @@ def argParser():
         print("Syntax: main.py <inputfile> <outputfile>")
         return None , 1
 
-fileIn, fileOut, code = argParser()
-
-if code == 1:
-    exit()
-
 def fileParser(fileName):
     fileContents = []
     import os
@@ -21,16 +16,11 @@ def fileParser(fileName):
     if os.path.isfile(fileName) == True and open(fileName, 'r').read(1) != '':
         File = open(fileName, 'r')
         fileContents = File.read().split('\n')
+        File.close()
         return fileContents , 0
     else:
         print("File does not exist or is empty.")
         return None , 1
-    File.close()
-
-text,code1 = fileParser(fileIn)
-
-if code1 == 1:
-    exit()
 
 def stringDetect(inputText):
     strings=[]
@@ -49,8 +39,26 @@ def stringDetect(inputText):
             strings.append(line[startIndex+1:stopIndex]) # Extract strings from all print commands
     return strings
 
+def C_gen(strings,fileOut):
+    writeFile = open(fileOut, 'w')
+    writeFile.write("#include<stdio.h>\nint main()\n{\n")
+    for string in strings:
+        writeFile.write('\tprintf("'+ string +'\\n");\n')
+    writeFile.write("}")
+    writeFile.close()
+    return 0
+
+fileIn, fileOut, code = argParser()
+
+if code == 1:
+    exit()
+
+text, code = fileParser(fileIn)
+
+if code == 1:
+    exit()
+
 strings = stringDetect(text)
 print(strings)
 
-def C_gen(strings,fileOut):
-    writeFile = open(fileOut)
+C_gen(strings, fileOut)
