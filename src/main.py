@@ -2,16 +2,17 @@ def argParser():
     import sys
     try:
         file2parse=sys.argv[1]
-        return file2parse, 0 # return filename and success code
+        fileOut=sys.argv[2]
+        return file2parse, fileOut, 0 # return filename and success code
     except:
         print("Filename not provided.")
-        print("Syntax: main.py <inputFile>")
+        print("Syntax: main.py <inputfile> <outputfile>")
         return None , 1
 
-#file,code = argParser()
+fileIn, fileOut, code = argParser()
 
-#if code == 1:
-#    exit()
+if code == 1:
+    exit()
 
 def fileParser(fileName):
     fileContents = []
@@ -24,11 +25,12 @@ def fileParser(fileName):
     else:
         print("File does not exist or is empty.")
         return None , 1
+    File.close()
 
-#text,code1 = fileParser(file)
+text,code1 = fileParser(fileIn)
 
-#if code1 == 1:
-#    exit()
+if code1 == 1:
+    exit()
 
 def stringDetect(inputText):
     strings=[]
@@ -44,4 +46,11 @@ def stringDetect(inputText):
                 if line[index] == defsymbol:
                     stopIndex = index
                     break
-            strings.append[line[startIndex:stopIndex+1]]
+            strings.append(line[startIndex+1:stopIndex]) # Extract strings from all print commands
+    return strings
+
+strings = stringDetect(text)
+print(strings)
+
+def C_gen(strings,fileOut):
+    writeFile = open(fileOut)
