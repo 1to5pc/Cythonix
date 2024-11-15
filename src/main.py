@@ -24,6 +24,7 @@ def fileParser(fileName):
 
 def stringDetect(inputText):
     strings=[]
+    startIndex = -1
     for line in inputText:
         if 'print' in line:
             for index in range(len(line)):
@@ -32,11 +33,13 @@ def stringDetect(inputText):
                     startIndex = index
                     break
             index = 0
-            for index in range(startIndex+1, len(line)):
-                if line[index] == defsymbol:
-                    stopIndex = index
-                    break
-            strings.append(line[startIndex+1:stopIndex]) # Extract strings from all print commands
+            if startIndex != -1:
+                for index in range(startIndex+1, len(line)):
+                    if line[index] == defsymbol:
+                        stopIndex = index
+                        break
+                strings.append(line[startIndex+1:stopIndex]) # Extract strings from all print commands
+            startIndex = -1
     return strings
 
 def C_gen(strings,fileOut):
